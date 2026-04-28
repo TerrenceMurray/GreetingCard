@@ -1,0 +1,457 @@
+:root {
+  --pink: #ff5b8a;
+  --yellow: #ffd166;
+  --green: #5fb13a;
+  --deep-green: #2f6b1a;
+  --sky-1: #b6e8ff;
+  --sky-2: #d9b8ff;
+  --sky-3: #ffd6e8;
+  font-family: 'Comic Neue', 'Quicksand', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background: linear-gradient(135deg, #ffd6e8, #d6e4ff, #c9f0ff, #d4f4d8, #ffe9c4, #ffd6e8);
+  background-size: 400% 400%;
+  animation: bgShift 28s ease infinite;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+@keyframes bgShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.app {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ============ background layer ============ */
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bubble {
+  position: absolute;
+  bottom: -10%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), rgba(180, 220, 255, 0.4) 60%, rgba(180, 220, 255, 0.1));
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+  filter: blur(0.4px);
+}
+
+.sparkle {
+  position: absolute;
+  background: radial-gradient(circle, #fff 0%, #ffd166 40%, transparent 70%);
+  border-radius: 50%;
+  box-shadow: 0 0 12px #ffd166;
+}
+
+.fly {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* ============ scenes ============ */
+.scene {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+}
+
+.intro .hint {
+  font-size: clamp(20px, 3vw, 28px);
+  color: #7a2c4e;
+  margin-bottom: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.present {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  filter: drop-shadow(0 12px 20px rgba(193, 75, 126, 0.3));
+}
+
+.tap-hint {
+  margin-top: 8px;
+  font-size: 16px;
+  color: #555;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* ============ party scene ============ */
+.party {
+  gap: 0;
+  padding-top: 40px;
+  padding-bottom: 60px;
+  justify-content: flex-start;
+}
+
+.title {
+  font-size: clamp(28px, 7vw, 64px);
+  font-weight: 900;
+  margin: 0;
+  letter-spacing: 1px;
+  line-height: 1.1;
+  text-align: center;
+  max-width: 96vw;
+  padding: 0 8px;
+}
+
+.title-char-wrap {
+  display: inline-block;
+  padding: 0 1px;
+}
+
+.title-char {
+  display: inline-block;
+  background: linear-gradient(180deg, #ff5b8a 0%, #ffd166 45%, #06d6a0 75%, #9b5de5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(2px 2px 0 rgba(122, 44, 78, 0.45)) drop-shadow(0 0 12px rgba(255, 91, 138, 0.25));
+}
+
+.subtitle {
+  font-size: clamp(14px, 1.6vw, 18px);
+  color: #6b3a55;
+  margin: 8px 0 24px 0;
+  font-style: italic;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  height: clamp(280px, 52vw, 380px);
+  margin: 8px auto 0;
+}
+
+.frog-wrap {
+  position: absolute;
+  inset-inline: 0;
+  margin-inline: auto;
+  bottom: 8px;
+  z-index: 2;
+  filter: drop-shadow(0 14px 10px rgba(47, 107, 26, 0.35));
+  width: clamp(220px, 46vw, 340px);
+}
+
+.frog-svg {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  overflow: visible;
+  display: block;
+}
+
+.lilypad {
+  position: absolute;
+  inset-inline: 0;
+  margin-inline: auto;
+  bottom: 0;
+  z-index: 1;
+  filter: drop-shadow(0 8px 10px rgba(34, 89, 26, 0.35));
+  width: clamp(260px, 50vw, 380px);
+  height: auto;
+}
+
+.ripple-wrap {
+  position: absolute;
+  bottom: 18px;
+  inset-inline: 0;
+  margin-inline: auto;
+  width: clamp(260px, 50vw, 380px);
+  height: 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ripple {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 70%;
+  height: 24px;
+  border: 2px solid rgba(110, 200, 255, 0.6);
+  border-radius: 50%;
+  background: transparent;
+}
+
+.hearts-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.float-heart {
+  position: absolute;
+  bottom: 40%;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 4px 6px rgba(255, 91, 138, 0.4));
+}
+
+.poke-burst {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 900;
+  font-size: 28px;
+  color: #ff5b8a;
+  text-shadow: 2px 2px 0 #fff, 4px 4px 0 rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  z-index: 5;
+  letter-spacing: 1px;
+}
+
+/* ============ cake ============ */
+.cake-wrap {
+  margin-top: -10px;
+  cursor: pointer;
+  filter: drop-shadow(0 8px 10px rgba(122, 44, 78, 0.3));
+  transition: transform 0.2s ease;
+  width: clamp(160px, 30vw, 220px);
+}
+
+.cake-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.cake-wrap:hover {
+  transform: translateY(-3px);
+}
+
+/* ============ note card ============ */
+.note-card {
+  position: relative;
+  margin-top: 20px;
+  padding: 18px 28px 14px 28px;
+  background: #fffaa8;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #6b3a55;
+  box-shadow: 4px 6px 0 rgba(0, 0, 0, 0.08);
+  transform: rotate(-1deg);
+  max-width: 80vw;
+  line-height: 1.4;
+}
+
+.note-pin {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ff8fb7, #c14b7e 70%);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.poke-hint {
+  margin-top: 14px;
+  font-size: 13px;
+  color: #6b3a55;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* ============ balloons ============ */
+.balloons {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.balloon {
+  position: absolute;
+  bottom: 50%;
+  width: 60px;
+  height: 80px;
+}
+
+.balloon-body {
+  width: 60px;
+  height: 75px;
+  border-radius: 50% 50% 48% 48%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.6), var(--bg) 50%);
+  border: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.balloon-tie {
+  width: 0;
+  height: 0;
+  margin: -2px auto 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid var(--bg);
+}
+
+.balloon-string {
+  width: 1px;
+  height: 120px;
+  margin: 0 auto;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* ============ achievement banner ============ */
+.achievement {
+  margin-top: 14px;
+  background: linear-gradient(90deg, #ffd166, #ff5b8a, #9b5de5);
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 10px 22px;
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(155, 93, 229, 0.4);
+  font-size: 13px;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* ============ confetti ============ */
+.confetti-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -40px;
+}
+
+/* ============ tablet ============ */
+@media (max-width: 900px) {
+  .party {
+    padding-top: 32px;
+    padding-bottom: 48px;
+  }
+  .balloon {
+    width: 50px;
+    height: 66px;
+  }
+  .balloon-body {
+    width: 50px;
+    height: 62px;
+  }
+  .balloon-string {
+    height: 100px;
+  }
+}
+
+/* ============ phone ============ */
+@media (max-width: 600px) {
+  .scene {
+    padding: 16px 12px;
+  }
+  .party {
+    padding-top: 24px;
+    padding-bottom: 40px;
+  }
+  .subtitle {
+    margin: 6px 8px 16px;
+  }
+  .stage {
+    height: clamp(260px, 78vw, 340px);
+    margin-top: 4px;
+  }
+  .note-card {
+    margin-top: 14px;
+    font-size: 15px;
+    padding: 14px 20px 12px;
+  }
+  .balloon {
+    width: 36px;
+    height: 50px;
+  }
+  .balloon-body {
+    width: 36px;
+    height: 46px;
+  }
+  .balloon-string {
+    height: 70px;
+  }
+  .achievement {
+    font-size: 11px;
+    padding: 9px 18px;
+    letter-spacing: 1px;
+  }
+  .poke-burst {
+    font-size: 22px;
+  }
+}
+
+/* ============ tiny phones ============ */
+@media (max-width: 380px) {
+  .title {
+    font-size: 28px;
+  }
+  .balloon {
+    display: none;
+  }
+}
+
+/* ============ short / landscape ============ */
+@media (max-height: 720px) {
+  .party {
+    padding-top: 20px;
+    padding-bottom: 30px;
+  }
+}
+
+/* ============ reduced motion ============ */
+@media (prefers-reduced-motion: reduce) {
+  body {
+    animation: none;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

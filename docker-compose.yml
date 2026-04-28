@@ -1,0 +1,29 @@
+services:
+  # Production-like static build, served via nginx on http://localhost:8080
+  # Runs by default: `docker compose up`
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: greetingcard:latest
+    container_name: greetingcard-web
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+
+  # Vite dev server with hot reload on http://localhost:5173
+  # Opt-in: `docker compose --profile dev up`
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: greetingcard:dev
+    container_name: greetingcard-dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    profiles: ["dev"]
