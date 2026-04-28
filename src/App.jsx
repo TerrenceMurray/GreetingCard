@@ -4,6 +4,7 @@ import Frog from './components/Frog'
 import Confetti from './components/Confetti'
 import Background from './components/Background'
 import Cake from './components/Cake'
+import { playHappyBirthday, stopMusic, subscribeMusic, playFart } from './utils/audio'
 import './index.css'
 
 const FRIEND_NAME = 'Ashaki'
@@ -28,12 +29,18 @@ export default function App() {
   const openCard = () => {
     setScene('party')
     setBurst((b) => b + 1)
+    playHappyBirthday()
   }
+
+  useEffect(() => {
+    return () => stopMusic()
+  }, [])
 
   const onPoke = () => {
     setPokes((p) => p + 1)
     setNote((n) => (n + 1) % QUIRKY_NOTES.length)
     setBurst((b) => b + 1)
+    playFart()
 
     const stamp = Date.now()
     const fresh = Array.from({ length: 4 }).map((_, i) => ({
@@ -156,6 +163,9 @@ function PartyScene({ burst, note, pokes, hearts, onPoke }) {
 
       <Balloons />
 
+      <MusicButton />
+
+
       <h1 className="title" aria-label={title}>
         {title.split('').map((ch, i) => (
           <motion.span
@@ -274,6 +284,38 @@ function PartyScene({ burst, note, pokes, hearts, onPoke }) {
         </motion.p>
       )}
     </motion.div>
+  )
+}
+
+function MusicButton() {
+  const [playing, setPlaying] = useState(false)
+
+  useEffect(() => subscribeMusic(setPlaying), [])
+
+  const toggle = () => {
+    if (playing) stopMusic()
+    else playHappyBirthday()
+  }
+
+  return (
+    <motion.button
+      className="music-btn"
+      onClick={toggle}
+      whileHover={{ scale: 1.06 }}
+      whileTap={{ scale: 0.94 }}
+      animate={playing ? { rotate: [0, -3, 3, -3, 0] } : { rotate: 0 }}
+      transition={playing ? { duration: 1.4, repeat: Infinity } : {}}
+      aria-label={playing ? 'Stop music' : 'Replay birthday song'}
+    >
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden>
+        {playing ? (
+          <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
+        ) : (
+          <path d="M12 5V2L7 7l5 5V8a6 6 0 1 1-6 6H4a8 8 0 1 0 8-9z" />
+        )}
+      </svg>
+      <span>{playing ? 'stop' : 'replay'}</span>
+    </motion.button>
   )
 }
 

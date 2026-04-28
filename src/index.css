@@ -351,6 +351,47 @@ body {
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
 }
 
+/* ============ music button ============ */
+.music-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  height: 40px;
+  padding: 0 16px 0 12px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #ff8fb7, #c14b7e);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(193, 75, 126, 0.4);
+  z-index: 20;
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.15);
+}
+
+.music-btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  .music-btn {
+    top: 14px;
+    right: 14px;
+    height: 34px;
+    padding: 0 12px 0 10px;
+    font-size: 11px;
+    gap: 6px;
+  }
+}
+
 /* ============ confetti ============ */
 .confetti-layer {
   position: fixed;
